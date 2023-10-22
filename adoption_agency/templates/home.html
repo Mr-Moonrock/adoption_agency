@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Adoption Agency </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"> -->
+</head>
+
+<body>
+    <div class="container text-center">
+        <h2 class="display-2 text-center"> Adoption Agency </h2>
+        <h4 class="display-6 text-center"> Available Pets </h4>
+        <a href="{{ url_for('add_pet') }}"> Add a Pet </a>
+    </div>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            {% for pet in pets %}
+                <div class="col">
+                    {{ pet.name }}
+                    <br>
+                    {% if pet.photo_url %}
+                    <img src="{{ pet.photo_url }}" 
+                         alt="{{ pet.name }} Image" 
+                         width="250" 
+                         height="200">
+                    {% endif %}
+                    <br>
+                    <a href="{{ url_for('pet_detail', pet_id=pet.id) }}">View Details</a>
+
+                    {% if pet.available %}
+                    <br>
+                    <strong>Available</strong>
+                    {% endif %}
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    
+
+</body>
+</html>
